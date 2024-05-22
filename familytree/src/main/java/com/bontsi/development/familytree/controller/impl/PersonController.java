@@ -29,4 +29,19 @@ public class PersonController implements PersonApi {
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found with id: " + id));
         return ResponseEntity.ok().body(person);
     }
+
+    @Override
+    public void addPerson(Person person) {
+        personRepository.save(person);
+    }
+
+    @Override
+    public void updatePerson(long id, Person person) {
+personRepository.saveAndFlush(person);
+    }
+
+    @Override
+    public void deletePerson(long id) {
+        personRepository.deleteById(id);
+    }
 }

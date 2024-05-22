@@ -1,0 +1,38 @@
+version: '3.2'
+services:
+
+  familytree:
+    image: 'postgres:11.9-alpine'
+    restart: always
+    environment:
+      - POSTGRES_USER=familytree
+      - POSTGRES_PASSWORD=Siviwe_01
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'pgdata:/var/lib/postgresql/data'
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - 'rabbitmq_data:/data'
+
+  hazelcast:
+    image: hazelcast/hazelcast:5.3.6
+    ports:
+    - "5701:5701"
+    
+  management-center:
+    image: hazelcast/management-center:5.3
+    ports:
+    - "15701:8080"
+    environment:
+    - MC_DEFAULT_CLUSTER=dev
+    - MC_DEFAULT_CLUSTER_MEMBERS=hazelcast
+
+volumes:
+  pgdata:
+  rabbitmq_data:

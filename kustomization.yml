@@ -1,0 +1,9 @@
+resources:
+  - backend-deployment.yaml
+  - frontend-deployment.yaml
+
+images:
+  - name: ndimphiwe/familytree
+    newTag: latest
+  - name: ndimphiwe/frontend
+    newTag: latest

@@ -24,24 +24,36 @@ public class PersonController implements PersonApi {
     }
 
     @Override
-    public ResponseEntity<Person> getPersonById(long id) {
-        Person person = personRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Person not found with id: " + id));
+    public ResponseEntity<Person> getPersonById(long personId) {
+        Person person = personRepository.findById(personId)
+                .orElseThrow(() -> new ResourceNotFoundException("Person not found with id: " + personId));
         return ResponseEntity.ok().body(person);
     }
 
     @Override
-    public void addPerson(Person person) {
-        personRepository.save(person);
+    public Person  addPerson(Person person) {
+       return personRepository.save(person);
     }
 
     @Override
-    public void updatePerson(long id, Person person) {
-personRepository.saveAndFlush(person);
-    }
+    public ResponseEntity<Person>  updatePerson(long personId, Person personDetails) {
 
+        Person person = personRepository.findById(personId)
+                .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id :: " + personId));
+
+        person.setFirstName(personDetails.getFirstName());
+        person.setLastName(personDetails.getLastName());
+        person.setDateOfBirth(personDetails.getDateOfBirth());
+
+        final Person updatedPerson = personRepository.save(person);
+        return ResponseEntity.ok(updatedPerson);
+    }
     @Override
-    public void deletePerson(long id) {
-        personRepository.deleteById(id);
+    public  ResponseEntity<Void> deletePerson(long personId) {
+        Person person = personRepository.findById(personId)
+                .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id :: " + personId));
+
+        personRepository.delete(person);
+        return ResponseEntity.noContent().build();
     }
 }

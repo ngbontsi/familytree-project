@@ -12,11 +12,11 @@ public interface PersonApi {
     @GetMapping
     ResponseEntity<List<Person>> getAllPersons();
     @GetMapping("/{id}")
-    ResponseEntity<Person> getPersonById(@PathVariable long id);
+    ResponseEntity<Person> getPersonById(@PathVariable(value = "id") long personId);
     @PostMapping()
-    void addPerson(@PathVariable Person person);
+    Person  addPerson( @RequestBody  Person person);
     @PutMapping("/{id}")
-    void updatePerson(@PathVariable long id,Person person);
+    ResponseEntity<Person> updatePerson(@PathVariable(value = "id") long personId, @RequestBody Person person);
     @DeleteMapping("/{id}")
-    void deletePerson(@PathVariable long id);
+    ResponseEntity<Void> deletePerson(@PathVariable(value = "id") long personId);
 }

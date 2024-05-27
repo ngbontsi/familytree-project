@@ -14,25 +14,25 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long personID;
 
-    @Column(name = "FirstName")
+    @Column(name = "firstname")
     private String firstName;
 
-    @Column(name = "LastName")
+    @Column(name = "lastname")
     private String lastName;
 
-    @Column(name = "Gender")
+    @Column(name = "gender")
     private char gender;
 
-    @Column(name = "DateOfBirth")
+    @Column(name = "dateofbirth")
     private Date dateOfBirth;
 
-    @Column(name = "DateOfDeath")
+    @Column(name = "dateofdeath")
     private Date dateOfDeath;
 
-    @Column(name = "PlaceOfBirth")
+    @Column(name = "placeofbirth")
     private String placeOfBirth;
 
-    @Column(name = "PlaceOfDeath")
+    @Column(name = "placeofdeath")
     private String placeOfDeath;
 
 }
